@@ -12,5 +12,5 @@ mvn spring-boot:run
 ```
 
 ## Pruebas de API
-https://github.com/DannPandal/First_Hexagonal_Java/tree/main/src/test/java/com/codigo/semana7/POST.png
+https://github.com/DannPandal/First_Hexagonal_Java/blob/main/src/test/java/com/codigo/images/POST.png
 
