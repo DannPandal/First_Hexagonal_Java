@@ -5,12 +5,13 @@ import com.codigo.semana7.domain.model.Person;
 import java.util.Optional;
 
 public interface PersonUseCase {
-    Person createPerson(Person persona);
+    Person createPerson(Person person);
 
     Optional<Person> getPerson(Long id);
 
-    Person updatePerson(Person persona);
+    Optional<Person> updatePerson(Person person);
 
-    // case uses for delete por in
+    // case uses for delete por id
     boolean deletePerson(Long id);
+
 }

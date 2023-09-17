@@ -16,8 +16,8 @@ public class PersonService implements PersonUseCase {
     }
 
     @Override
-    public Person createPerson(Person persona) {
-        return personUseCase.createPerson(persona);
+    public Person createPerson(Person person) {
+        return personUseCase.createPerson(person);
     }
 
     @Override
@@ -26,8 +26,8 @@ public class PersonService implements PersonUseCase {
     }
 
     @Override
-    public Person updatePerson(Person persona) {
-        return personUseCase.updatePerson(persona);
+    public Optional<Person> updatePerson(Person person) {
+        return personUseCase.updatePerson(person);
     }
 
     @Override

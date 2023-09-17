@@ -6,12 +6,12 @@ import java.util.Optional;
 
 public interface PersonRepositoryPort {
 
-    Person save(Person persona);
+    Person save(Person person);
 
     Optional<Person> findById(Long id);
 
-    Person update(Person persona);
+    Optional<Person> update(Person person);
 
     // person delete repository port out
-    boolean delete(Long id);
+    boolean deleteById(Long id);
 }

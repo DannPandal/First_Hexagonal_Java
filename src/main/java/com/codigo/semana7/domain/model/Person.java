@@ -1,25 +1,27 @@
 package com.codigo.semana7.domain.model;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class Person {
     private Long id;
-    private String nombre;
-    private String apellido;
-    private Date fechaNacimiento;
-    private String genero;
+    private String name;
+    private String lastName;
+    private Date birthday;
+    private String gender;
 
-    public Person(Long id, String nombre, String apellido, Date fechaNacimiento, String genero) {
+    public Person(Long id, String name, String lastName, Date birthday, String gender) {
         this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fechaNacimiento = fechaNacimiento;
-        this.genero = genero;
+        this.name = name;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.gender = gender;
     }
+
 }

@@ -6,10 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/person")
 public class PersonController {
 
+    /* Controller of Person from get up information */
     private final PersonService personService;
 
     public PersonController(PersonService personService) {
@@ -25,7 +28,6 @@ public class PersonController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPerson(@PathVariable Long id){
-        System.out.println("id: para ger person id" );
         return personService.getPerson(id)
                 .map(person -> new ResponseEntity<>(person, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -34,24 +36,31 @@ public class PersonController {
 
     @PutMapping
     public ResponseEntity<Person> updatePerson(@RequestBody Person person){
-        Person updatePerson = personService.updatePerson(person);
-        return new ResponseEntity<>(updatePerson, HttpStatus.OK);
+//        Person updatePerson = personService.updatePerson(person);
+//        return new ResponseEntity<>(., HttpStatus.OK);
+
+        //Optional<Person> optionalPerson = Optional.ofNullable(personService.updatePerson(person));
+//        if (optionalPerson.isPresent()){
+//            return new ResponseEntity<>(optionalPerson.get(), HttpStatus.OK);
+//        }
+//        else{
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+
+        return personService.updatePerson(person)
+                .map(person1 -> new ResponseEntity<>(person1, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePerson(@PathVariable Long id){
-//        String deletePerson = personService.deletePerson(id);
-//        return new ResponseEntity<>(deletePerson, HttpStatus.OK);
-        return personService.getPerson(id)
-                .map(person -> {
-//                    boolean deletedPerson = personService.deletePerson(id);
-                    if (personService.deletePerson(id)) {
-                        return new ResponseEntity<>("Persona eliminada", HttpStatus.OK);
-                    } else {
-                        return new ResponseEntity<>("Persona no eliminada", HttpStatus.NOT_FOUND);
-                    }
-//                    return new ResponseEntity<>("Persona eliminada", HttpStatus.OK);
-                })
-                .orElse(new ResponseEntity<>("Persona no encontrada",HttpStatus.NOT_FOUND));
+
+        if (personService.deletePerson(id)) {
+            return new ResponseEntity<>("Person deleted successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Person not found", HttpStatus.NOT_FOUND);
+        }
+
     }
+
 }

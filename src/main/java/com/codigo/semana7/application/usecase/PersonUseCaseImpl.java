@@ -18,8 +18,8 @@ public class PersonUseCaseImpl implements PersonUseCase {
     }
 
     @Override
-    public Person createPerson(Person persona) {
-        return personRepositoryPort.save(persona);
+    public Person createPerson(Person person) {
+        return personRepositoryPort.save(person);
     }
 
     @Override
@@ -28,13 +28,13 @@ public class PersonUseCaseImpl implements PersonUseCase {
     }
 
     @Override
-    public Person updatePerson(Person persona) {
-        return personRepositoryPort.update(persona);
+    public Optional<Person> updatePerson(Person person) {
+        return personRepositoryPort.update(person);
     }
 
     @Override
     public boolean deletePerson(Long id) {
-        return personRepositoryPort.delete(id);
+        return personRepositoryPort.deleteById(id);
     }
 
 }

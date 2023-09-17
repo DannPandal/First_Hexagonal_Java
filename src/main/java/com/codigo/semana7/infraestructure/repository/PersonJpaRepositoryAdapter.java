@@ -10,6 +10,10 @@ import java.util.Optional;
 @Component
 public class PersonJpaRepositoryAdapter implements PersonRepositoryPort {
 
+    /*
+    Person Jpa Adaptaer donde se implementan los metodos de PersonRepositoryPort
+    Logica para respuesta.
+    */
     private final PersonJpaRepository personJpaRepository;
 
     public PersonJpaRepositoryAdapter(PersonJpaRepository personJpaRepository) {
@@ -29,16 +33,24 @@ public class PersonJpaRepositoryAdapter implements PersonRepositoryPort {
     }
 
     @Override
-    public Person update(Person persona) {
-        return personJpaRepository.save(PersonEntity.fromDomainModel(persona)).toDomainModel();
+    public Optional<Person> update(Person person) {
+        PersonEntity personEntity = PersonEntity.fromDomainModel(person);
+
+        if(personJpaRepository.existsById(person.getId())){
+            PersonEntity updatedPersonEntity = personJpaRepository.save(personEntity);
+            return Optional.of(updatedPersonEntity.toDomainModel());
+        }
+        return Optional.empty();
     }
 
+
     @Override
-    public boolean delete(Long id) {
-        return personJpaRepository.findById(id)
-                .map(personEntity -> {
-                        personJpaRepository.delete(personEntity);
-                        return true;
-                }).orElse(false);
+    public boolean deleteById(Long id) {
+        if(personJpaRepository.existsById(id)){
+            personJpaRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
+
 }
